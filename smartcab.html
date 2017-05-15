@@ -11813,7 +11813,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import the visualization code</span>
@@ -11907,10 +11907,26 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>agent.py:<ul>
+<li><p>agent.py:</p>
+<ul>
 <li>learning: this flag determines if the learning-agent uses Q-learning or not, if set to be true, the agent uses Q-learning during the policy generating and choosing process. </li>
 <li>epsilon: a continuous value between 0 and 1 for the exploration factor, the higher the value, the more likely the agents is going to exploring its neighboring positions during the Q-learning</li>
 <li>n_test: a discrete number of testing trials to perform, default = 0</li>
+</ul>
+</li>
+<li><p>environment.py:</p>
+<ul>
+<li>"act()" is the function in environment.py to make an agent performs an action</li>
+</ul>
+</li>
+<li><p>simulator.py:</p>
+<ul>
+<li>"render()" and "render_text()" share similar functionality in displaying the current state at each step of the simulation. "render()" is designed for simulation with a GUI to update in the user interface while "render_text()" display the states in textual format in command lines.</li>
+</ul>
+</li>
+<li><p>planner.py:</p>
+<ul>
+<li>"next_waypoint()" considers the "east-west" directions first and then "south-north"</li>
 </ul>
 </li>
 </ul>
@@ -11950,7 +11966,7 @@ Run the agent.py file after setting the flags from projects/smartcab folder inst
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load the &#39;sim_no-learning&#39; log file from the initial simulation results</span>
@@ -13085,17 +13101,17 @@ ZmZmZjXkkGVmZmZmZlZD/w8Y7ssd32a45wAAAABJRU5ErkJggg==
 <p><strong>Answer:</strong></p>
 <ul>
 <li>efficiency:<ul>
-<li>“waypoint": inidcates the directions to the destination.    </li>
+<li>"waypoint": inidcates the directions to the destination.    </li>
 </ul>
 </li>
 <li>safety:<ul>
-<li>”light": if the light is red, and the driving agent intends to go forward or left, this brings a high risk of causing a accident, therefore, the "light" should not be ignored.</li>
+<li>"light": if the light is red, and the driving agent intends to go forward or left, this brings a high risk of causing a accident, therefore, the "light" should not be ignored.</li>
 <li>"left": if the cab on left is driving forward and the current agent intends to drive right, it has to notice the action of the car on its left to avoid risk of collision. </li>
-<li>“oncoming": similar to "left", if the oncoming is turning left and the current agent is driving forward, it may cause a collision.</li>
+<li>"oncoming": similar to "left", if the oncoming is turning left and the current agent is driving forward, it may cause a collision.</li>
 </ul>
 </li>
 <li>inappropriate:<ul>
-<li>”left": left can be ignored since they are responsible to notice the cars on their left on themselvies to avoid potential collision. </li>
+<li>”left": left can be ignored since they are responsible to notice the cars on their right by themselvies to avoid potential collision. </li>
 <li>"deadline": this flag is completely irrevelent in the policy making and choosing process for the driving agent in consideration of safety and reliability.</li>
 </ul>
 </li>
@@ -13203,7 +13219,7 @@ $$ \epsilon_{t+1} = \epsilon_{t} - 0.05, \hspace{10px}\textrm{for trial number }
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load the &#39;sim_default-learning&#39; file from the default Q-Learning simulation</span>
@@ -14456,7 +14472,7 @@ $$ \epsilon = a^t, \textrm{for } 0 < a < 1 \hspace{50px}\epsilon = \frac{1}{t^2}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
@@ -15826,7 +15842,7 @@ mZlZHTnIMjMzMzMzq6P/BxWO5XcxOO1WAAAAAElFTkSuQmCC
 <p><strong>Answer:</strong></p>
 <ul>
 <li>my decaying function for epsilon: 1/(t^2) where t is number of trails</li>
-<li>after about 60 trails, the agent starts to become reliable enough and causing very few violations</li>
+<li>after about over 60 trails, the agent starts to become reliable enough and causing very few violations, comparing to default non-learning agent, the total violations rate drops from about 15% to below 2%. The average reward of action raise from negative to 1.5. Rate of reliability increases from below 15% to close 80%. </li>
 <li>I chose tolerance to be 0.0001 (extremely small) and alpha to be 0.95. I set the tolerance to be small and alpha to be big and causing the decaying function to have a long thin tail so that the agent can learn all 96 states and learn a good policy for each state.</li>
 <li>the imporved Q-learner is a lot better in terms of both safety and reliability</li>
 <li>Based on the rating of "A+" for safety and "A" for reliability, I confident to say my driving agent successfully learned an appropriate policy.</li>
@@ -15873,6 +15889,16 @@ mZlZHTnIMjMzMzMzq6P/BxWO5XcxOO1WAAAAAElFTkSuQmCC
 </li>
 </ul>
 <p>This is an sample state result generated by my improved-learner. The action with the highest value is to go forward which makes sense because the background is light is green, and there is no car on my left and front and my intended direction is forward. To achieve a good reliability score to actually reach the destination, it is definitely the optimal policy to go forward at this situation.</p>
+<ul>
+<li>forward_red_right_right<ul>
+<li>None : 0.00</li>
+<li>forward : 0.00</li>
+<li>right : 0.00</li>
+<li>left : -37.59</li>
+</ul>
+</li>
+</ul>
+<p>In this sample state, the agent want to go forward and both cabs on its from right and oncoming want to go to right. It makes sense that agent should not go to left to avoid collision with the opposite going left but in this case, the learner is undecided between none, forward, and right. In this case, I think going forward is definitely not valid. Considering the light is red, the agent doing "None" which means just stop seems might be a reasonable action. Also, if going right can eventually get me to the destination, going right in thise case might be a valid action as well.</p>
 
 </div>
 </div>
